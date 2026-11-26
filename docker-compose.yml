@@ -1,0 +1,20 @@
+# Equivalent to `npm run dev` for machines that have Docker.
+# The browser still uses localhost ports, which are published below.
+services:
+  desk:
+    image: node:22-bookworm
+    working_dir: /app
+    init: true
+    volumes:
+      - ./:/app
+      - lumen-modules:/app/node_modules
+    ports:
+      - "5173:5173"
+      - "5174:5174"
+      - "4001:4001"
+      - "4002:4002"
+      - "4003:4003"
+    command: bash -lc "npm install && npm run dev"
+
+volumes:
+  lumen-modules:
